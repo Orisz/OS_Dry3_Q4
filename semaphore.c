@@ -1,5 +1,5 @@
 #include "semaphore.h"
-using namespace std;
+
 
 void init_sem(sem *s, unsigned int initial_value)
 {
@@ -25,11 +25,12 @@ void up(sem *s)
 }
 void down(sem *s)
 {
+	pthread_mutex_lock(&(s->semaphoreMutex));
 	pthread_mutex_lock(&(s->counterMutex));
 	s->m_counter--;
-	if (s->m_counter == 0)
+	if (s->m_counter > 0)
 	{
-		pthread_mutex_lock(&(s->semaphoreMutex));
+		pthread_mutex_unlock(&(s->semaphoreMutex));
 	}
 	pthread_mutex_unlock(&(s->counterMutex));
 }

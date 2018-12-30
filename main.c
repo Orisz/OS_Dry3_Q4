@@ -6,7 +6,7 @@ sem semaphore;
 unsigned int sharedCounter;
 void* thread_A_func(void* args)
 {
-	while (true)
+	while (1)
 	{
 		down(&semaphore);
 		if (sharedCounter < A_MAX)
@@ -25,7 +25,7 @@ void* thread_A_func(void* args)
 }
 void* thread_B_func(void* args)
 {
-	while (true)
+	while (1)
 	{
 		down(&semaphore);
 		if (sharedCounter < B_MAX)
@@ -61,13 +61,13 @@ int main()
 		perror("thread B create error");
 		exit(1);
 	}
-	int ret_join_A = pthread_join(&thread_A, NULL);
+	int ret_join_A = pthread_join(thread_A, NULL);
 	if (ret_join_A != 0)
 	{
 		perror("thread A join error");
 		exit(1);
 	}
-	int ret_join_B = pthread_join(&thread_B, NULL);
+	int ret_join_B = pthread_join(thread_B, NULL);
 	if (ret_join_B != 0)
 	{
 		perror("thread B join error");

@@ -4,7 +4,6 @@
 #include "pthread_includes.h"
 #include <stdio.h>
 #include<stdlib.h>
-#include <cstdlib>
 struct sem
 { 
 	pthread_mutex_t counterMutex;
@@ -15,3 +14,4 @@ typedef struct sem sem;
 void init_sem(sem *s, unsigned int initial_value);
 void up(sem *s);
 void down(sem *s);
+#endif
